@@ -28,7 +28,7 @@ impl Player {
 
     #[export]
     pub fn _physics_process(&mut self, owner: &KinematicBody2D, delta: f64) {
-        godot_print!("{:?}", self.velocity);
+        // godot_print!("{:?}", self.velocity);
         let input = Input::godot_singleton();
         self.velocity.y += self.gravity * delta as f32;
 

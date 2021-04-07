@@ -19,6 +19,10 @@ config/name="godot-platformer"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/always_on_top=true
+
 [input]
 
 move_left={
@@ -39,4 +43,5 @@ jump={
 
 [rendering]
 
+environment/default_clear_color=Color( 0.278431, 0.239216, 1, 1 )
 environment/default_environment="res://default_env.tres"
