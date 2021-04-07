@@ -4,9 +4,9 @@
 [ext_resource path="res://Player.gdns" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 60.0769, 60.1249 )
+extents = Vector2( 45.4219, 43.2526 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "idle"
 tracks/0/type = "value"
 tracks/0/path = NodePath("dragon:frame")
@@ -21,8 +21,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "walk"
+[sub_resource type="Animation" id=3]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -43,16 +42,21 @@ position = Vector2( -1.09546, 2.71718 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -64 )
+position = Vector2( 1.09546, -45.7172 )
 shape = SubResource( 1 )
 
 [node name="dragon" type="Sprite" parent="."]
-position = Vector2( -0.0559654, -60.8847 )
+position = Vector2( 1.09546, -58.7172 )
 scale = Vector2( 4.91663, 4.91663 )
 texture = ExtResource( 1 )
 hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
-anims/idle = SubResource( 3 )
-anims/walk = SubResource( 2 )
+anims/idle = SubResource( 2 )
+anims/walk = SubResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_bottom = 1000
+smoothing_enabled = true
