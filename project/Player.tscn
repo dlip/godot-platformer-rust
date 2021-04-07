@@ -4,7 +4,7 @@
 [ext_resource path="res://Player.gdns" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 45.4219, 43.2526 )
+extents = Vector2( 8, 8 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -42,12 +42,11 @@ position = Vector2( -1.09546, 2.71718 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1.09546, -45.7172 )
+position = Vector2( 1.09546, -10.7172 )
 shape = SubResource( 1 )
 
 [node name="dragon" type="Sprite" parent="."]
-position = Vector2( 1.09546, -58.7172 )
-scale = Vector2( 4.91663, 4.91663 )
+position = Vector2( 1.09546, -14.7172 )
 texture = ExtResource( 1 )
 hframes = 5
 
@@ -58,5 +57,6 @@ anims/walk = SubResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-limit_bottom = 1000
+zoom = Vector2( 0.3, 0.3 )
+limit_bottom = 400
 smoothing_enabled = true

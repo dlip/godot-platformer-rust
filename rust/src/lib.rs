@@ -15,7 +15,7 @@ impl Player {
     fn new(_owner: &KinematicBody2D) -> Self {
         Player {
             velocity: Vector2::new(0.0, 0.0),
-            gravity: 2000.0,
+            gravity: 1000.0,
         }
     }
 
@@ -44,21 +44,21 @@ impl Player {
             - Input::get_action_strength(&input, "move_left") as f32;
 
         if owner.is_on_floor() && Input::is_action_pressed(&input, "jump") {
-            self.velocity.y = -60000.0 * delta as f32;
+            self.velocity.y = -20000.0 * delta as f32;
         }
 
-        self.velocity.x += direction * 20000.0 * delta as f32;
+        self.velocity.x += direction * 2000.0 * delta as f32;
         self.velocity.x = self
             .velocity
             .x
-            .min(50000.0 * delta as f32)
-            .max(-50000.0 * delta as f32);
+            .min(7000.0 * delta as f32)
+            .max(-7000.0 * delta as f32);
 
         if self.velocity.x > 0.0 {
-            self.velocity.x -= 9000.0 * delta as f32;
+            self.velocity.x -= 400.0 * delta as f32;
             self.velocity.x = self.velocity.x.max(0.0);
         } else if self.velocity.x < 0.0 {
-            self.velocity.x += 9000.0 * delta as f32;
+            self.velocity.x += 500.0 * delta as f32;
             self.velocity.x = self.velocity.x.min(0.0);
         }
 
