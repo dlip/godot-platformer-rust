@@ -6,8 +6,16 @@ use gdnative::api::{AnimationPlayer, OS};
 #[inherit(KinematicBody2D)]
 pub struct Player {
     velocity: Vector2,
-    #[property(path = "base/gravity")]
+    #[property(default = 1000.0)]
     gravity: f32,
+    #[property(default = 10000.0)]
+    max_speed: f32,
+    #[property(default = 4000.0)]
+    acceleration: f32,
+    #[property(default = 1000.0)]
+    friction: f32,
+    #[property(default = 25000.0)]
+    jump_power: f32,
 }
 
 #[gdnative::methods]
@@ -16,6 +24,10 @@ impl Player {
         Player {
             velocity: Vector2::new(0.0, 0.0),
             gravity: 1000.0,
+            max_speed: 10000.0,
+            friction: 1000.0,
+            jump_power: 25000.0,
+            acceleration: 4000.0,
         }
     }
 
@@ -32,8 +44,7 @@ impl Player {
         if owner.position().y > 600.0 {
             let tree = owner.get_tree().expect("could not retrieve SceneTree");
             let tree = unsafe { tree.assume_safe() };
-
-            tree.change_scene("res://Dead.tscn");
+            let res: std::result::Result<(), GodotError> = tree.change_scene("res://Dead.tscn");
         }
         let input = Input::godot_singleton();
         self.velocity.y += self.gravity * delta as f32;
@@ -42,21 +53,21 @@ impl Player {
             - Input::get_action_strength(&input, "move_left") as f32;
 
         if owner.is_on_floor() && Input::is_action_pressed(&input, "jump") {
-            self.velocity.y = -20000.0 * delta as f32;
+            self.velocity.y = -self.jump_power * delta as f32;
         }
 
-        self.velocity.x += direction * 2000.0 * delta as f32;
+        self.velocity.x += direction * self.acceleration * delta as f32;
         self.velocity.x = self
             .velocity
             .x
-            .min(7000.0 * delta as f32)
-            .max(-7000.0 * delta as f32);
+            .min(self.max_speed * delta as f32)
+            .max(-self.max_speed* delta as f32);
 
         if self.velocity.x > 0.0 {
-            self.velocity.x -= 400.0 * delta as f32;
+            self.velocity.x -= self.friction * delta as f32;
             self.velocity.x = self.velocity.x.max(0.0);
         } else if self.velocity.x < 0.0 {
-            self.velocity.x += 500.0 * delta as f32;
+            self.velocity.x += self.friction * delta as f32;
             self.velocity.x = self.velocity.x.min(0.0);
         }
 
