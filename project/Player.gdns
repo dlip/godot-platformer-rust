@@ -2,7 +2,9 @@
 
 [sub_resource type="GDNativeLibrary" id=1]
 entry/Windows.64 = "res://lib/debug.dll"
+entry/Windows.32 = "res://lib/debug.dll"
 dependency/Windows.64 = [  ]
+dependency/Windows.32 = [  ]
 
 [resource]
 resource_name = "Player"
