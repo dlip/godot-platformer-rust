@@ -61,7 +61,7 @@ impl Player {
             .velocity
             .x
             .min(self.max_speed * delta as f32)
-            .max(-self.max_speed* delta as f32);
+            .max(-self.max_speed * delta as f32);
 
         if self.velocity.x > 0.0 {
             self.velocity.x -= self.friction * delta as f32;
@@ -73,10 +73,10 @@ impl Player {
 
         self.velocity = owner.move_and_slide(
             self.velocity,
-            Vector2::new(0.0, 1.0),
-            false,
-            100,
-            45.0,
+            Vector2::new(0.0, -1.0),
+            true,
+            4,
+            0.785398,
             true,
         );
 
